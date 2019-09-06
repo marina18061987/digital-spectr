@@ -1,0 +1,80 @@
+<!-- Верстка соответствовует макету по Pixel Perfect
+(проверено PerfectPixel by WellDoneCode для google chrome при масштабе 100%)
+Блок с формой имеет фиксированную ширину и центрирован
+Фокус при загрузке формы установлен на поле ввода телефона (form__input2)
+Форма отправляет данные методом POST по адресу https://digital-spectr.com/ac/academy.php 
+Используется JS-валидация (функция checkForm() проверяет данные формы
+перед отправкой):
+ФИО: только русские буквы, пробелы, тире. Цифры, англ. буквы - нельзя
+Телефон: только цифры, “-”, пробелы, “+”
+type="email" - для проверки e-mail.
+
+Применяются приципы БЭМ-нэйминга.
+
+-->
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Статичная вёрстка формы</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="description" content="Вёрстка статичная" />
+    <meta name="keywords" content="форма ввода данных" />
+	<link type="text/css" rel="stylesheet" href="main.css" />
+</head>
+<body>
+    <form class="form" name="form" action="https://digital-spectr.com/ac/academy.php " method="post" 
+	enctype="multipart/form-data" onsubmit="return checkForm(this)" >
+  		<legend class="form__legend">Задать вопрос</legend>
+		<div class="form__content1">
+            <input class="form__input1" type="text" name="name" placeholder="Фамилия Имя Отчество*"/>
+        </div>
+		<div class="form__content2">
+            <input class="form__input2" type="tel" name="phone" placeholder="Телефон" autofocus />
+        </div>
+		<div class="form__content3">
+            <input class="form__input3" type="email" name="email" placeholder="Email"/>
+        </div>
+        <div class="form__submit1">
+			<input class="form__button" type="submit" name="submit" value="ОТПРАВИТЬ ЗАПРОС" />
+		</div>
+    </form>
+	
+
+<script type="text/javascript">
+		function checkForm(form) {
+		
+		var name = form.name.value;
+        var phone = form.phone.value;
+		
+		var n = name.match(/^[А-Яа-я-" "]*$/);
+
+		if (!n) {
+				alert("имя введёно неверно. Используйте буквы 'а-я' большие или маленькие, знаки '-' и пробел ");
+				return false;
+			}
+		
+		
+		var m = phone.match(/^[0-9-+" "]*$/);
+
+		if (!m) {
+				alert("телефон введён неверно. Используйте цифры, знаки '-' и '+' и пробел");
+				return false;
+			}
+	
+        return true;
+	
+		}
+		
+		
+		
+		
+		
+	</script>
+	
+	
+	
+	
+</body>
+</html>
